@@ -21,8 +21,8 @@ gần như tức thì, đo được hiệu quả, và chỉ ra cách vá để l
 
 ## 2. Sơ đồ & thành phần
 
-Sơ đồ kiến trúc tổng thể: xem `so-do/kien-truc-tong-the.svg`.
-Bản đồ các kiểu tấn công & khả năng phát hiện: xem `so-do/ban-do-tan-cong.svg`.
+Sơ đồ kiến trúc tổng thể: xem `assets/so-do/kien-truc-tong-the.svg`.
+Bản đồ các kiểu tấn công & khả năng phát hiện: xem `assets/so-do/ban-do-tan-cong.svg`.
 
 ```
    [A: Attacker]  ))) sóng tấn công )))        ((( sóng bình thường (((  [AP: TL-WR940N]
@@ -168,7 +168,7 @@ trong 2 hướng và ghi rõ trong báo cáo:
 ### Người B — Sensor (giám sát không dây)
 - Đặt card ở monitor mode, vị trí nghe được cả A và AP.
 - **Thiết kế cảm biến đã chốt:** dùng `tshark` lọc frame deauth/disassoc, ghi log định dạng cố
-  định cho Wazuh — đây là cách đã hiện thực trong `sensor/sensor-wids.py`. Kismet là phương án
+  định cho Wazuh — đây là cách đã hiện thực trong `code/sensor/sensor-wids.py`. Kismet là phương án
   thay thế (đọc alert qua REST API rồi ghi cùng định dạng) nếu muốn WIDS đầy đủ hơn.
 - Cấu hình Wazuh agent (`<localfile>`) đọc file log, gửi về manager.
 - Thu thập & bàn giao log mẫu cho C. (khớp Lab 4: Wireless Security Monitoring)

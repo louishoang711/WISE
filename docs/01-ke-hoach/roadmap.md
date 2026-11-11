@@ -69,7 +69,7 @@ Wave song song:
 **Goal:** Log từ cảm biến chảy tới dashboard Wazuh và sinh được cảnh báo.
 
 **Thứ tự cấu hình:**
-1. **B:** chạy cảm biến `sensor/sensor-wids.py` (tshark lọc frame deauth/disassoc) ghi ra
+1. **B:** chạy cảm biến `code/sensor/sensor-wids.py` (tshark lọc frame deauth/disassoc) ghi ra
    `/var/log/wifi-wids.log` theo định dạng cố định. (Kismet là phương án thay thế nếu muốn WIDS đầy đủ.)
 2. **B:** kiểm tra log sinh đúng định dạng khi có deauth thử.
 3. **B:** cài Wazuh agent, cấu hình `<localfile>` trỏ vào file log, đăng ký agent với manager của C.
@@ -130,8 +130,8 @@ Wave song song:
 
 **Goal:** Ghép tất cả thành báo cáo + slide bảo vệ.
 
-- Ghép Chương 1–5 (xem cấu trúc trong `kich-ban-do-an.md` mục 7).
-- Chèn 2 sơ đồ (`so-do/*.svg`).
+- Ghép Chương 1–5 (xem cấu trúc trong `docs/03-kich-ban/kich-ban-demo.md` mục 7).
+- Chèn 2 sơ đồ (`assets/so-do/*.svg`).
 - Chuẩn bị slide theo mạch: bối cảnh → kiến trúc → tấn công → giám sát → phòng thủ → kết luận.
 - Tập thuyết trình (G3.2).
 

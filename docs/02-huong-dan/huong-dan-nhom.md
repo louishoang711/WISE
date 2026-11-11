@@ -1,7 +1,7 @@
 # Hướng dẫn chi tiết cả nhóm — Đồ án An toàn mạng không dây
 
 > Phân vai: **Huy = Attacker (A)** · **Hưng = Sensor (B)** · **Khang = Wazuh (C) + hạ tầng**
-> Đọc kèm: `kich-ban-do-an.md` (kịch bản demo), `ROADMAP.md` (chia phase).
+> Đọc kèm: `docs/03-kich-ban/kich-ban-demo.md` (kịch bản demo), `docs/01-ke-hoach/roadmap.md` (chia phase).
 
 ---
 
@@ -62,7 +62,7 @@ Khang lo **router, switch, đi dây cho cả nhóm**, rồi dựng Wazuh.
 
 ### 1.3 Dựng Wazuh
 - Cài Wazuh manager + dashboard (máy ảo được). Đặt IP tĩnh cùng dải switch.
-- Cài decoder + rule: xem `wazuh/README.md` (đã viết sẵn file `local_decoder.xml`,
+- Cài decoder + rule: xem `code/wazuh/README.md` (đã viết sẵn file `local_decoder.xml`,
   `local_rules.xml`).
 - Phối hợp với Hưng đăng ký agent của Hưng về manager.
 
@@ -87,14 +87,14 @@ sudo airmon-ng start wlan0 6        # thay wlan0 bằng card thật (xem `iw dev
 ```
 
 ### 2.3 Chạy cảm biến
-- Dùng script đã viết sẵn `sensor/sensor-wids.py`:
+- Dùng script đã viết sẵn `code/sensor/sensor-wids.py`:
 ```bash
-sudo python3 sensor/sensor-wids.py wlan0mon
+sudo python3 code/sensor/sensor-wids.py wlan0mon
 ```
 - Script ghi mỗi frame deauth thành 1 dòng vào `/var/log/wifi-wids.log`.
 
 ### 2.4 Nối vào Wazuh
-- Thêm khối `<localfile>` trỏ `/var/log/wifi-wids.log` vào `ossec.conf` (xem `wazuh/README.md`).
+- Thêm khối `<localfile>` trỏ `/var/log/wifi-wids.log` vào `ossec.conf` (xem `code/wazuh/README.md`).
 - Restart agent. Báo Khang kiểm tra log đã về manager chưa.
 
 ### 2.5 Khi demo
@@ -121,31 +121,109 @@ sudo airmon-ng start wlan0 6        # kênh 6 theo Khang
 
 ---
 
-## 4. CÁC KỊCH BẢN TẤN CÔNG (6 màn)
+## 4. CÁC KỊCH BẢN TẤN CÔNG — từng bước chi tiết
 
-Mỗi màn: Hưng + Khang bật ghi trước, Huy ghi mốc thời gian bắt đầu/kết thúc.
+**Quy ước chung:**
+- Mọi lệnh giả định interface monitor là `wlan0mon`, AP ở **kênh 6** (đổi theo thực tế của Khang).
+- Thay `<AP_BSSID>` = MAC router, `<CLIENT_MAC>` = MAC điện thoại nạn nhân (lấy ở Màn 1).
+- Hưng + Khang **bật ghi TRƯỚC**, Huy ghi mốc thời gian bắt đầu/kết thúc từng màn.
+- Chỉ chạy trên AP/thiết bị của chính nhóm, trong lab cách ly.
 
-| Màn | Tên | Huy làm | Kỳ vọng ở Wazuh (Khang) |
-|---|---|---|---|
-| **0** | Baseline | Không tấn công, client lướt web | Dashboard sạch, không alert |
-| **1** | Recon (quét) | Quét liệt kê AP/client/kênh | Khó bắt (ghi nhận là giới hạn) |
-| **2** | Deauth flood | Gửi đợt deauth vào client | **Alert "Deauth flood" mức cao** |
-| **3** | Handshake + crack | Bắt handshake, crack mật khẩu yếu → đổi sang mật khẩu mạnh, crack lại | Bắt được hành vi ép rớt mạng |
-| **phụ** | WPS attack | Tấn công WPS (khi WPS bật) | Alert WPS — tùy chọn (xem ghi chú dưới) |
-| **4** | PMKID | Lấy PMKID, không deauth | **Khó bắt** (giới hạn hệ thống) |
+Bảng tổng quan:
 
-Chi tiết từng màn: xem `kich-ban-do-an.md` mục 3.
+| Màn | Tên | Kỳ vọng ở Wazuh |
+|---|---|---|
+| 0 | Baseline | Dashboard sạch |
+| 1 | Recon | Khó bắt (giới hạn) |
+| 2 | Deauth flood | Alert "Deauth flood" mức cao |
+| 3 | Handshake + crack (yếu/mạnh) | Bắt hành vi ép rớt mạng |
+| phụ | WPS | Tùy chọn (xem ghi chú) |
+| 4 | PMKID | Khó bắt (giới hạn) |
 
-> **Ghi chú phát hiện WPS:** cảm biến mặc định (`sensor-wids.py`) chỉ bắt frame deauth. Rule Wazuh
-> đã có sẵn ID 100120 cho `type=wps`, nhưng để nó nổ thì cảm biến phải phát sinh sự kiện `type=wps`
-> (đếm burst gói auth/assoc tới AP). Nếu không mở rộng cảm biến → ghi màn WPS là "tấn công minh họa,
-> không đo phát hiện". Đây là lựa chọn phạm vi, ghi rõ trong báo cáo.
+### Màn 0 — Baseline
+1. Client để kết nối bình thường, lướt web vài phút.
+2. Khang xác nhận dashboard Wazuh **không có alert**. Đây là mốc "sạch" để so sánh.
 
-### Màn 3 — chi tiết so sánh mật khẩu
-1. Khang để AP mật khẩu yếu `12345678` → Huy bắt handshake → crack → **ra mật khẩu**.
-2. Khang đổi AP sang mật khẩu mạnh (vd `Tr#9kL2$mXq8!vZ`) → Huy bắt handshake lại → crack →
-   **chạy hết wordlist vẫn thất bại**.
-3. Kết luận: handshake luôn bắt được, an toàn phụ thuộc độ mạnh mật khẩu.
+### Màn 1 — Recon (trinh sát)
+1. Quét toàn bộ xung quanh:
+   ```bash
+   sudo airodump-ng wlan0mon
+   ```
+2. Trong bảng kết quả, tìm AP của nhóm (cột `ESSID` = `Lab-Cafe-Wifi`). Ghi lại:
+   - `BSSID` (MAC của AP) → dùng cho `<AP_BSSID>`.
+   - `CH` (kênh), `ENC`/`CIPHER`/`AUTH` (phải là WPA2).
+   - Ở phần dưới (`STATION`), tìm MAC client đang kết nối vào BSSID đó → dùng cho `<CLIENT_MAC>`.
+3. `Ctrl+C` để dừng. (Màn này gần như không để lại dấu hiệu → WIDS khó bắt, ghi nhận là giới hạn.)
+
+### Màn 2 — Deauth flood
+1. **Cửa sổ 1** — khóa vào đúng AP/kênh và ghi gói ra file (cửa sổ này dùng tiếp cho Màn 3):
+   ```bash
+   sudo airodump-ng --bssid <AP_BSSID> -c 6 -w capture wlan0mon
+   ```
+2. **Cửa sổ 2** — gửi một đợt deauth tới client (giả danh AP):
+   ```bash
+   sudo aireplay-ng --deauth 20 -a <AP_BSSID> -c <CLIENT_MAC> wlan0mon
+   ```
+   - `--deauth 20` = gửi 20 đợt. Để tạo "flood" liên tục cho rule (≥5 gói/10s), có thể dùng
+     `--deauth 0` (gửi mãi) rồi `Ctrl+C` khi đủ — **chỉ trong lab**.
+   - `-a` = AP, `-c` = client. Bỏ `-c` sẽ deauth broadcast (kém hiệu quả hơn).
+3. Quan sát: client rớt mạng. Khang xem dashboard → **alert "Deauth flood" (rule 100111) phải nổ**
+   trong vài giây. Ghi lại thời gian từ lúc bấm tới lúc có alert.
+
+### Màn 3 — Bắt handshake + crack (so sánh mật khẩu yếu/mạnh)
+1. Giữ **cửa sổ 1** (airodump ở Màn 2) đang chạy. Deauth ở Màn 2 khiến client tự kết nối lại →
+   airodump sẽ hiện `WPA handshake: <AP_BSSID>` ở góc trên phải khi bắt được.
+2. Bắt được handshake rồi thì `Ctrl+C` cửa sổ 1. File lưu là `capture-01.cap`.
+3. Giải nén wordlist nếu cần (lần đầu):
+   ```bash
+   gunzip /usr/share/wordlists/rockyou.txt.gz
+   ```
+4. Crack bằng từ điển:
+   ```bash
+   sudo aircrack-ng -w /usr/share/wordlists/rockyou.txt -b <AP_BSSID> capture-01.cap
+   ```
+   - **Lần 1 (mật khẩu yếu `12345678`):** nếu mật khẩu nằm trong wordlist → hiện
+     `KEY FOUND! [ 12345678 ]`.
+   - **Lần 2 (mật khẩu mạnh):** Khang đổi mật khẩu AP sang chuỗi dài, ngẫu nhiên (hoa/thường/số/
+     ký tự đặc biệt, không phải từ có nghĩa). Huy bắt handshake lại (lặp Màn 2 + bước 1–4) →
+     aircrack **chạy hết wordlist vẫn không ra**.
+5. Kết luận: handshake **luôn** bắt được; an toàn cuối cùng phụ thuộc **độ mạnh mật khẩu**.
+
+### Màn phụ — WPS (chỉ khi Khang bật WPS)
+1. Quét AP có bật WPS:
+   ```bash
+   sudo wash -i wlan0mon
+   ```
+   Xem cột `WPS Locked`: nếu AP của nhóm hiện WPS bật và chưa khóa thì tấn công được.
+2. Chạy reaver dò PIN:
+   ```bash
+   sudo reaver -i wlan0mon -b <AP_BSSID> -c 6 -vv
+   ```
+3. Lưu ý thực tế: nhiều router **tự khóa WPS** (WPS Locked) sau vài lần sai → tấn công thất bại.
+   Đây chính là minh họa phòng thủ. Các tùy chọn nâng cao của reaver (pixie-dust, chỉnh delay)
+   **đối chiếu `reaver -h` và tài liệu chính thức** — không ghi bừa flag ở đây.
+
+> **Ghi chú phát hiện WPS:** cảm biến mặc định (`code/sensor/sensor-wids.py`) chỉ bắt frame deauth.
+> Rule Wazuh đã có ID 100120 cho `type=wps`, nhưng để nó nổ thì cảm biến phải phát sinh sự kiện
+> `type=wps` (đếm burst gói auth/assoc tới AP). Nếu không mở rộng cảm biến → ghi màn WPS là "tấn
+> công minh họa, không đo phát hiện". Đây là lựa chọn phạm vi, ghi rõ trong báo cáo.
+
+### Màn 4 — PMKID (nâng cao, âm thầm)
+Ý tưởng: lấy PMKID chỉ bằng một yêu cầu tới AP, **không cần deauth** → WIDS khó bắt. Luồng chung
+gồm 3 công cụ: `hcxdumptool` (bắt) → `hcxpcapngtool` (chuyển sang hash) → `hashcat -m 22000` (crack).
+
+> **Không ghi cú pháp cụ thể ở đây.** Các flag của `hcxdumptool`/`hcxpcapngtool` **thay đổi nhiều
+> theo phiên bản** (nhiều tùy chọn cũ đã bị loại/đổi tên). Để không bịa, hãy đối chiếu
+> `hcxdumptool --help`, `hcxpcapngtool --help` và tài liệu chính thức của **đúng phiên bản** đang
+> cài trên máy, rồi điền lệnh thực tế vào báo cáo.
+
+Các bước khái niệm:
+1. Dùng `hcxdumptool` bắt traffic trên interface monitor → file `.pcapng`.
+2. Dùng `hcxpcapngtool` chuyển `.pcapng` → file hash định dạng `22000`.
+3. Dùng `hashcat -m 22000 <file_hash> <wordlist>` để crack.
+
+Kỳ vọng: không có deauth flood → cảm biến gần như không thấy bất thường → **WIDS khó/không báo**.
+Ghi nhận đây là **giới hạn của hệ thống giám sát** (điểm cộng khi dám chỉ ra).
 
 ---
 

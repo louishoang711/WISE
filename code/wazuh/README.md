@@ -46,7 +46,7 @@ Rồi `sudo systemctl restart wazuh-agent`. Đăng ký agent với manager của
 
 ## Kiểm thử end-to-end
 
-1. Hưng chạy script cảm biến (xem thư mục `sensor/`).
+1. Hưng chạy script cảm biến (xem `code/sensor/sensor-wids.py`).
 2. Huy gửi một đợt deauth thử.
 3. Khang xem dashboard: rule 100111 "Deauth flood" phải nổ ở mức 12 trong vài giây.
 
