@@ -1,0 +1,16 @@
+<!--
+  Decoder tùy biến cho WIDS Wi-Fi - do Khang (Wazuh) cài.
+  Đặt file này tại: /var/ossec/etc/decoders/local_decoder.xml trên Wazuh manager.
+  Log đầu vào (do cảm biến của Hưng ghi ra) có dạng:
+    WIFI-WIDS type=deauth bssid=A0:B1:C2:D3:E4:F5 client=11:22:33:44:55:66 channel=6 count=1
+-->
+
+<decoder name="wifi-wids">
+  <prematch>^WIFI-WIDS </prematch>
+</decoder>
+
+<decoder name="wifi-wids-fields">
+  <parent>wifi-wids</parent>
+  <regex>type=(\S+) bssid=(\S+) client=(\S+) channel=(\d+) count=(\d+)</regex>
+  <order>attack_type,bssid,client,channel,count</order>
+</decoder>

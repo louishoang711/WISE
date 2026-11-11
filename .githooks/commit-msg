@@ -1,0 +1,4 @@
+#!/bin/sh
+# Xóa dòng Co-Authored-By nếu có
+sed -i '/^[Cc]o-[Aa]uthored-[Bb]y:/d' "$1"
+exit 0

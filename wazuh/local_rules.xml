@@ -1,0 +1,47 @@
+<!--
+  Rule tùy biến cho WIDS Wi-Fi - do Khang (Wazuh) cài.
+  Đặt file này tại: /var/ossec/etc/rules/local_rules.xml trên Wazuh manager.
+  ID dùng dải >= 100000 (dải dành cho rule tự viết).
+  Yêu cầu Wazuh 4.3+ (dùng <same_field> để tương quan theo client).
+-->
+
+<group name="wifi,wids,">
+
+  <!-- Rule gốc: nhận diện mọi sự kiện Wi-Fi từ cảm biến -->
+  <rule id="100100" level="3">
+    <decoded_as>wifi-wids</decoded_as>
+    <description>WIDS: su kien Wi-Fi tu cam bien ($(attack_type))</description>
+  </rule>
+
+  <!-- Một gói deauth đơn lẻ (mức thấp, có thể là nhiễu tự nhiên) -->
+  <rule id="100110" level="4">
+    <if_sid>100100</if_sid>
+    <field name="attack_type">^deauth$</field>
+    <description>WIDS: phat hien goi deauth toi client $(client)</description>
+  </rule>
+
+  <!-- TẤN CÔNG Deauth flood: >= 5 gói deauth tới cùng 1 client trong 10 giây -->
+  <rule id="100111" level="12" frequency="5" timeframe="10">
+    <if_matched_sid>100110</if_matched_sid>
+    <same_field>client</same_field>
+    <description>WIDS: TAN CONG Deauth flood vao client $(client) tu AP $(bssid)</description>
+    <group>attack,dos,</group>
+  </rule>
+
+  <!-- Hoạt động tấn công WPS -->
+  <rule id="100120" level="10">
+    <if_sid>100100</if_sid>
+    <field name="attack_type">^wps$</field>
+    <description>WIDS: hoat dong tan cong WPS tren AP $(bssid)</description>
+    <group>attack,wps,</group>
+  </rule>
+
+  <!-- Nghi ngờ rogue AP / Evil Twin (SSID trùng, BSSID lạ) -->
+  <rule id="100130" level="8">
+    <if_sid>100100</if_sid>
+    <field name="attack_type">^rogue_ap$</field>
+    <description>WIDS: nghi ngo rogue AP / Evil Twin ($(bssid))</description>
+    <group>attack,rogue_ap,</group>
+  </rule>
+
+</group>
