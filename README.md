@@ -12,7 +12,7 @@
 ![Status](https://img.shields.io/badge/Tr%E1%BA%A1ng%20th%C3%A1i-Đang%20ph%C3%A1t%20tri%E1%BB%83n-f39c12)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[Kế hoạch](docs/01-ke-hoach/roadmap.md) · [Hướng dẫn nhóm](docs/02-huong-dan/huong-dan-nhom.md) · [Kịch bản demo](docs/03-kich-ban/kich-ban-demo.md) · [Kết quả](docs/04-ket-qua/) · [Báo cáo](docs/05-bao-cao/) · [Pháp lý & đạo đức](docs/LEGAL_ETHICS.md)
+[Kế hoạch](docs/01-ke-hoach/roadmap.md) · [Hướng dẫn nhóm](docs/02-huong-dan/huong-dan-nhom.md) · [Kịch bản demo](docs/03-kich-ban/kich-ban-demo.md) · [ROE](docs/ROE.md) · [ATT&CK mapping](docs/ATTACK_MAPPING.md) · [Kết quả](docs/04-ket-qua/) · [Pháp lý & đạo đức](docs/LEGAL_ETHICS.md)
 
 </div>
 
@@ -64,7 +64,23 @@ Sensor (Hưng) → tshark bắt frame → log → Wazuh agent ─cáp→ Wazuh m
 | Biết mình (A/B/C) phải làm gì, cấu hình máy ra sao | [docs/02-huong-dan/huong-dan-nhom.md](docs/02-huong-dan/huong-dan-nhom.md) |
 | Nắm thứ tự làm việc, chia phase, phụ thuộc | [docs/01-ke-hoach/roadmap.md](docs/01-ke-hoach/roadmap.md) |
 | Xem chi tiết từng màn demo + số liệu đo | [docs/03-kich-ban/kich-ban-demo.md](docs/03-kich-ban/kich-ban-demo.md) |
+| Biết phạm vi được phép làm (như một pentest thật) | [docs/ROE.md](docs/ROE.md) |
+| Xem kịch bản ánh xạ theo MITRE ATT&CK | [docs/ATTACK_MAPPING.md](docs/ATTACK_MAPPING.md) |
+| Điền báo cáo kết quả kiểu pentest report | [docs/04-ket-qua/BAO-CAO-FINDINGS.md](docs/04-ket-qua/BAO-CAO-FINDINGS.md) |
 | Cài hệ thống phát hiện Wazuh | [code/wazuh/README.md](code/wazuh/README.md) |
+
+## Nghiệp vụ (Methodology)
+
+Dự án tuân theo quy trình đánh giá bảo mật chuẩn, không chỉ chạy tool rồi ghi lại:
+
+1. **[Rules of Engagement](docs/ROE.md)** — phạm vi, quyền hạn, giới hạn được phê duyệt trước khi
+   tấn công, đúng khuôn mẫu ROE trong pentest thật.
+2. **[MITRE ATT&CK Mapping](docs/ATTACK_MAPPING.md)** — mỗi kỹ thuật tấn công gắn với Tactic/
+   Technique chính thức (TA0006 Credential Access, T1110 Brute Force, T1557 AiTM...), ghi rõ ô nào
+   **chưa có ID chính thức** thay vì gán bừa.
+3. **[Findings Report](docs/04-ket-qua/BAO-CAO-FINDINGS.md)** — mẫu báo cáo theo cấu trúc pentest
+   report thật: Executive Summary → Findings theo mức độ nghiêm trọng → PoC → Khuyến nghị.
+4. **[SECURITY.md](SECURITY.md)** — quy trình báo cáo lỗ hổng trong chính mã nguồn của repo.
 
 ## Cấu trúc thư mục
 
@@ -115,7 +131,13 @@ WISE/
 
 Mã nguồn (`code/`) phát hành theo [MIT License](LICENSE). Việc sử dụng kỹ thuật tấn công mô tả
 trong `docs/` vẫn bị ràng buộc bởi [docs/LEGAL_ETHICS.md](docs/LEGAL_ETHICS.md) — giấy phép MIT
-**không** cấp quyền tấn công hệ thống không thuộc quyền sở hữu hoặc không có ủy quyền.
+**không** cấp quyền tấn công hệ thống không thuộc quyền sở hữu hoặc không có ủy quyền. Báo cáo lỗ
+hổng trong mã nguồn: xem [SECURITY.md](SECURITY.md).
+
+## Về dự án
+
+Blue Team Lead / phụ trách hạ tầng & giám sát: **Khang Hoàng Phúc**
+([@louishoang711](https://github.com/louishoang711)).
 
 ## Môn học & tài liệu
 
