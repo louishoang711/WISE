@@ -1,0 +1,28 @@
+# Capture files từ demo tấn công (chứa dữ liệu nhạy cảm — không commit)
+*.cap
+*.pcap
+*.pcapng
+*.22000
+
+# Log cảm biến thật thu được khi chạy lab
+*.log
+/var/log/
+
+# Wordlist lớn (tải riêng, không commit vào repo)
+rockyou.txt
+*.wordlist
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+
+# Wazuh local state (nếu dev trực tiếp trong repo)
+ossec.conf.bak

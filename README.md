@@ -10,8 +10,9 @@
 ![Detect](https://img.shields.io/badge/Blue%20Team-Wazuh%20WIDS-1f6fb2)
 ![Hardware](https://img.shields.io/badge/Lab-TL--WR940N%20%2B%20Switch-5d6d7e)
 ![Status](https://img.shields.io/badge/Tr%E1%BA%A1ng%20th%C3%A1i-Đang%20ph%C3%A1t%20tri%E1%BB%83n-f39c12)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-[Kế hoạch](docs/01-ke-hoach/roadmap.md) · [Hướng dẫn nhóm](docs/02-huong-dan/huong-dan-nhom.md) · [Kịch bản demo](docs/03-kich-ban/kich-ban-demo.md) · [Kết quả](docs/04-ket-qua/) · [Báo cáo](docs/05-bao-cao/)
+[Kế hoạch](docs/01-ke-hoach/roadmap.md) · [Hướng dẫn nhóm](docs/02-huong-dan/huong-dan-nhom.md) · [Kịch bản demo](docs/03-kich-ban/kich-ban-demo.md) · [Kết quả](docs/04-ket-qua/) · [Báo cáo](docs/05-bao-cao/) · [Pháp lý & đạo đức](docs/LEGAL_ETHICS.md)
 
 </div>
 
@@ -22,7 +23,7 @@
 > trên **thiết bị của chính nhóm**, trong một **mạng lab cách ly**, phục vụ mục đích học thuật của
 > môn học. Tấn công (deauth, bắt handshake, WPS, PMKID…) nhắm vào mạng Wi-Fi của người khác mà
 > không được phép là **vi phạm pháp luật**. Nhóm không chịu trách nhiệm cho bất kỳ việc sử dụng sai
-> mục đích nào.
+> mục đích nào. Chi tiết điều kiện và cơ sở pháp lý: [docs/LEGAL_ETHICS.md](docs/LEGAL_ETHICS.md).
 
 ## Dự án này là gì
 
@@ -108,6 +109,13 @@ WISE/
   ```bash
   sh setup.sh
   ```
+- Quy tắc đóng góp đầy đủ: [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Giấy phép
+
+Mã nguồn (`code/`) phát hành theo [MIT License](LICENSE). Việc sử dụng kỹ thuật tấn công mô tả
+trong `docs/` vẫn bị ràng buộc bởi [docs/LEGAL_ETHICS.md](docs/LEGAL_ETHICS.md) — giấy phép MIT
+**không** cấp quyền tấn công hệ thống không thuộc quyền sở hữu hoặc không có ủy quyền.
 
 ## Môn học & tài liệu
 
