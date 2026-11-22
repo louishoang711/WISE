@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kiến trúc lab WISE · WISE</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 12px; background: #f7f9fc; color: #182b43; font-family: 'Segoe UI', Arial, sans-serif; }
+    main { width: 100%; max-width: 960px; min-width: 0; margin-inline: auto; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    .diagram-container:focus-visible { outline: 2px solid #245db1; outline-offset: 2px; }
+    svg { width: 100%; min-width: 960px; display: block; }
+    h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    nav { padding: 0 24px 12px; font-size: 0.875rem; }
+    nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; list-style: none; }
+    a { color: #245db1; text-underline-offset: 3px; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Kiến trúc lab WISE</h1>
+    <div class="diagram-container" tabindex="0" role="region" aria-label="Sơ đồ">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="01-kien-truc-lab-title 01-kien-truc-lab-desc">
+  <title id="01-kien-truc-lab-title">Kiến trúc lab WISE</title>
+  <desc id="01-kien-truc-lab-desc">Router TL-WR940N nối các thiết bị Wi-Fi trong lab và dùng cổng LAN tích hợp để kết nối cảm biến với máy Wazuh.</desc>
+  <defs><marker id="01-kien-truc-lab-arrow-muted" viewBox="0 0 8 6" markerWidth="7" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M 0,0 L 8,3 L 0,6 Z" fill="#53677d"/></marker><marker id="01-kien-truc-lab-arrow-blue" viewBox="0 0 8 6" markerWidth="7" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M 0,0 L 8,3 L 0,6 Z" fill="#245db1"/></marker></defs>
+  <rect x="0" y="0" width="960" height="600" rx="0" fill="#f7f9fc" stroke="none"/>
+  <text x="40" y="37" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="500" letter-spacing="1" fill="#245db1">WISE / HẠ TẦNG</text>
+  <text x="40" y="76" text-anchor="start" font-family="Cambria, 'Times New Roman', serif" font-size="28" font-weight="400" letter-spacing="0" fill="#182b43">Kiến trúc lab WISE</text>
+  <text x="40" y="100" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Bố trí ghi nhận ngày 16/11/2026 và thiết bị cho kịch bản camera.</text>
+  <rect x="40" y="128" width="880" height="208" rx="8" fill="#f0f4f9" stroke="#cfd9e4" stroke-dasharray="4 4"/>
+  <text x="56" y="148" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="500" letter-spacing="1" fill="#53677d">MẠNG WI-FI LAB</text>
+  <rect x="40" y="352" width="880" height="168" rx="8" fill="#f0f4f9" stroke="#cfd9e4"/>
+  <text x="56" y="372" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="500" letter-spacing="1" fill="#53677d">MẠNG LAN</text>
+  <path d="M 232,244 H 376" fill="none" stroke="#53677d" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#01-kien-truc-lab-arrow-muted)"/>
+  <path d="M 584,244 H 728" fill="none" stroke="#53677d" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M 428,300 V 320 Q 428,328 420,328 H 156 Q 148,328 148,336 V 404" fill="none" stroke="#53677d" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#01-kien-truc-lab-arrow-muted)"/>
+  <path d="M 480,300 V 376 Q 480,384 472,384 H 240 Q 232,384 232,392 V 404" fill="none" stroke="#53677d" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M 532,300 V 376 Q 532,384 540,384 H 764 Q 772,384 772,392 V 404" fill="none" stroke="#53677d" stroke-width="1.4" stroke-linecap="round"/>
+  <rect x="266" y="224" width="76" height="12" rx="2" fill="#f7f9fc" stroke="none"/>
+  <text x="304" y="234" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="400" letter-spacing="0.4" fill="#53677d">KIỂM THỬ</text>
+  <rect x="632" y="224" width="48" height="12" rx="2" fill="#f7f9fc" stroke="none"/>
+  <text x="656" y="234" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="400" letter-spacing="0.4" fill="#53677d">WI-FI</text>
+  <rect x="248" y="308" width="80" height="12" rx="2" fill="#f7f9fc" stroke="none"/>
+  <text x="288" y="318" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="400" letter-spacing="0.4" fill="#53677d">THU 802.11</text>
+  <rect x="318" y="364" width="76" height="12" rx="2" fill="#f7f9fc" stroke="none"/>
+  <text x="356" y="374" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="400" letter-spacing="0.4" fill="#53677d">ETHERNET</text>
+  <rect x="614" y="364" width="76" height="12" rx="2" fill="#f7f9fc" stroke="none"/>
+  <text x="652" y="374" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="400" letter-spacing="0.4" fill="#53677d">ETHERNET</text>
+  <rect x="64" y="188" width="168" height="112" rx="6" fill="#f7f9fc" stroke="none"/>
+  <rect x="64" y="188" width="168" height="112" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <rect x="76" y="200" width="40" height="16" rx="2" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="96" y="211" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="500" letter-spacing="1" fill="#53677d">HUY</text>
+  <text x="76" y="237" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Máy kiểm thử</text>
+  <text x="76" y="255" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="9" font-weight="400" letter-spacing="0" fill="#53677d">AirHunt / Nmap</text>
+  <rect x="376" y="188" width="208" height="112" rx="6" fill="#f7f9fc" stroke="none"/>
+  <rect x="376" y="188" width="208" height="112" rx="6" fill="#eaf1fc" stroke="#245db1"/>
+  <rect x="388" y="200" width="52" height="16" rx="2" fill="#ffffff" stroke="#245db1"/>
+  <text x="414" y="211" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="500" letter-spacing="1" fill="#245db1">ROUTER</text>
+  <text x="388" y="237" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">TP-Link TL-WR940N v6</text>
+  <text x="388" y="255" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">WPA2-PSK · kênh 7</text>
+  <text x="388" y="271" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Cổng LAN tích hợp</text>
+  <rect x="728" y="188" width="168" height="112" rx="6" fill="#f7f9fc" stroke="none"/>
+  <rect x="728" y="188" width="168" height="112" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <rect x="740" y="200" width="52" height="16" rx="2" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="766" y="211" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="500" letter-spacing="1" fill="#53677d">CLIENT</text>
+  <text x="740" y="237" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">iPhone / Client Wi-Fi</text>
+  <text x="740" y="255" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Camera trong kịch bản</text>
+  <text x="740" y="271" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="9" font-weight="400" letter-spacing="0" fill="#53677d">SimpleIPCamera</text>
+  <rect x="64" y="404" width="248" height="96" rx="6" fill="#f7f9fc" stroke="none"/>
+  <rect x="64" y="404" width="248" height="96" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <rect x="76" y="416" width="40" height="16" rx="2" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="96" y="427" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="500" letter-spacing="1" fill="#53677d">HƯNG</text>
+  <text x="76" y="453" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Cảm biến WIDS</text>
+  <text x="76" y="471" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="9" font-weight="400" letter-spacing="0" fill="#53677d">Monitor Mode · Wazuh Agent</text>
+  <text x="76" y="487" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="9" font-weight="400" letter-spacing="0" fill="#53677d">Agent 002 hungs</text>
+  <rect x="648" y="404" width="248" height="96" rx="6" fill="#f7f9fc" stroke="none"/>
+  <rect x="648" y="404" width="248" height="96" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <rect x="660" y="416" width="48" height="16" rx="2" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="684" y="427" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="500" letter-spacing="1" fill="#53677d">KHANG</text>
+  <text x="660" y="453" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Máy Wazuh 4.9.2</text>
+  <text x="660" y="471" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="9" font-weight="400" letter-spacing="0" fill="#53677d">Manager · Indexer · Dashboard</text>
+  <text x="660" y="487" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Nhận log Agent qua LAN</text>
+  <path d="M 40,540 H 920" fill="none" stroke="#cfd9e4" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M 40,562 H 68" fill="none" stroke="#53677d" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="5 4" marker-end="url(#01-kien-truc-lab-arrow-muted)"/>
+  <text x="80" y="566" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#182b43">Hoạt động hoặc quan sát vô tuyến</text>
+  <path d="M 348,562 H 376" fill="none" stroke="#53677d" stroke-width="1.4" stroke-linecap="round"/>
+  <text x="388" y="566" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#182b43">Kết nối mạng</text>
+  <rect x="624" y="552" width="20" height="16" rx="2" fill="#eaf1fc" stroke="#245db1"/>
+  <text x="656" y="566" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#182b43">Router kiêm điểm nối LAN</text>
+</svg>
+    </div>
+    <nav aria-label="Tài liệu đối chiếu">
+      <ul>
+      <li><a href="../../../docs/04-ket-qua/nhat-ky-phien-16-11-2026.md">Nhật ký thực nghiệm</a></li>
+      <li><a href="../../../docs/03-kich-ban/phase/phase-00-ha-tang.md">Phase 00 · Hạ tầng</a></li>
+      <li><a href="02-pipeline-giam-sat.html">Luồng giám sát Wazuh</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

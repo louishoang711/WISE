@@ -1,53 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="680" height="420" viewBox="0 0 680 420" font-family="Arial, sans-serif">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="ban-do-tan-cong-title ban-do-tan-cong-desc" id="ban-do-tan-cong-root">
+  <title id="ban-do-tan-cong-title">Phạm vi phát hiện của WIDS</title>
+  <desc id="ban-do-tan-cong-desc">Ma trận đối chiếu các rủi ro của lab với khả năng quan sát của WIDS, kết quả đã ghi nhận và biện pháp phòng thủ theo kịch bản.</desc>
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M2 1L8 5L2 9" fill="none" stroke="#444441" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </marker>
+      <style>#ban-do-tan-cong-root { color: #182b43; font-family: 'Segoe UI', Arial, sans-serif; }
+      #ban-do-tan-cong-root .diagram-container { width: 100%; overflow-x: auto; }
+      #ban-do-tan-cong-root .diagram-container:focus-visible { outline: 2px solid #245db1; outline-offset: 2px; }
+      #ban-do-tan-cong-root nav { padding: 0 24px 12px; font-size: 0.875rem; }
+      #ban-do-tan-cong-root nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; list-style: none; }
+      #ban-do-tan-cong-root a { color: #245db1; text-underline-offset: 3px; }
+      @media print {
+#ban-do-tan-cong-root .diagram-container { overflow-x: visible; }
+      #ban-do-tan-cong-root nav { display: none; }
+}</style>
   </defs>
-  <rect x="0" y="0" width="680" height="420" fill="#ffffff"/>
 
-  <line x1="195" y1="190" x2="313" y2="66" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <line x1="195" y1="195" x2="313" y2="126" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <line x1="195" y1="200" x2="313" y2="190" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <line x1="195" y1="205" x2="313" y2="254" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-  <line x1="195" y1="210" x2="313" y2="318" stroke="#444441" stroke-width="1.5" marker-end="url(#arrow)"/>
-
-  <g>
-    <rect x="40" y="168" width="155" height="64" rx="8" fill="#FAECE7" stroke="#D85A30" stroke-width="1"/>
-    <text x="117" y="196" text-anchor="middle" fill="#712B13" font-size="14" font-weight="bold">Người A</text>
-    <text x="117" y="216" text-anchor="middle" fill="#993C1D" font-size="12">AirHunt</text>
-  </g>
-
-  <g>
-    <rect x="315" y="40" width="325" height="50" rx="8" fill="#EAF3DE" stroke="#639922" stroke-width="1"/>
-    <text x="333" y="62" fill="#27500A" font-size="14" font-weight="bold">Deauth flood (DoS)</text>
-    <text x="333" y="80" fill="#3B6D11" font-size="12">→ Client · WIDS bắt rõ</text>
-  </g>
-  <g>
-    <rect x="315" y="100" width="325" height="50" rx="8" fill="#EAF3DE" stroke="#639922" stroke-width="1"/>
-    <text x="333" y="122" fill="#27500A" font-size="14" font-weight="bold">Bắt handshake</text>
-    <text x="333" y="140" fill="#3B6D11" font-size="12">→ Client · WIDS bắt gián tiếp</text>
-  </g>
-  <g>
-    <rect x="315" y="164" width="325" height="50" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
-    <text x="333" y="186" fill="#633806" font-size="14" font-weight="bold">MAC spoofing</text>
-    <text x="333" y="204" fill="#854F0B" font-size="12">→ AP · WIDS bắt một phần</text>
-  </g>
-  <g>
-    <rect x="315" y="228" width="325" height="50" rx="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
-    <text x="333" y="250" fill="#633806" font-size="14" font-weight="bold">Tấn công WPS</text>
-    <text x="333" y="268" fill="#854F0B" font-size="12">→ AP · WIDS bắt một phần</text>
-  </g>
-  <g>
-    <rect x="315" y="292" width="325" height="50" rx="8" fill="#FCEBEB" stroke="#E24B4A" stroke-width="1"/>
-    <text x="333" y="314" fill="#791F1F" font-size="14" font-weight="bold">Quét LAN &amp; Camera IP (Nmap/HTTP)</text>
-    <text x="333" y="332" fill="#A32D2D" font-size="12">→ Mạng nội bộ (L3–L7) · WIDS tầng 2 không thấy</text>
-  </g>
-
-  <rect x="40" y="372" width="14" height="14" rx="3" fill="#EAF3DE" stroke="#639922" stroke-width="1"/>
-  <text x="60" y="383" fill="#444441" font-size="12">bắt rõ</text>
-  <rect x="190" y="372" width="14" height="14" rx="3" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
-  <text x="210" y="383" fill="#444441" font-size="12">bắt một phần</text>
-  <rect x="380" y="372" width="14" height="14" rx="3" fill="#FCEBEB" stroke="#E24B4A" stroke-width="1"/>
-  <text x="400" y="383" fill="#444441" font-size="12">khó bắt</text>
+  <rect x="0" y="0" width="960" height="600" rx="0" fill="#f7f9fc" stroke="none"/>
+  <text x="40" y="37" text-anchor="start" font-family="Consolas, 'Courier New', monospace" font-size="8" font-weight="500" letter-spacing="1" fill="#245db1">WISE / PHẠM VI PHÁT HIỆN</text>
+  <text x="40" y="76" text-anchor="start" font-family="Cambria, 'Times New Roman', serif" font-size="28" font-weight="400" letter-spacing="0" fill="#182b43">Phạm vi phát hiện của WIDS</text>
+  <text x="40" y="100" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Đối chiếu tín hiệu từ cảm biến 802.11 với các rủi ro trong kịch bản lab.</text>
+  <rect x="40" y="132" width="224" height="48" rx="6" fill="#182b43" stroke="none"/>
+  <text x="56" y="161" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#ffffff">Rủi ro trong lab</text>
+  <rect x="276" y="132" width="264" height="48" rx="6" fill="#182b43" stroke="none"/>
+  <text x="292" y="161" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#ffffff">WIDS quan sát được gì</text>
+  <rect x="552" y="132" width="368" height="48" rx="6" fill="#182b43" stroke="none"/>
+  <text x="568" y="161" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#ffffff">Biện pháp phòng thủ</text>
+  <rect x="40" y="192" width="224" height="48" rx="6" fill="#f0f4f9" stroke="#cfd9e4"/>
+  <text x="56" y="212" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Gián đoạn kết nối Wi-Fi</text>
+  <text x="56" y="229" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Deauth / Disassoc · 802.11 L2</text>
+  <rect x="276" y="192" width="264" height="48" rx="6" fill="#eaf1fc" stroke="#245db1"/>
+  <text x="292" y="212" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#245db1">Đã ghi nhận cảnh báo Deauth Flood</text>
+  <text x="292" y="229" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Rule 100111 · mức 12 · 16/11/2026</text>
+  <rect x="552" y="192" width="368" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="568" y="212" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Bảo vệ frame quản lý bằng 802.11w (PMF)</text>
+  <text x="568" y="229" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Kịch bản dùng AP phụ tương thích PMF.</text>
+  <rect x="40" y="244" width="224" height="48" rx="6" fill="#f0f4f9" stroke="#cfd9e4"/>
+  <text x="56" y="264" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Mật khẩu Wi-Fi yếu</text>
+  <text x="56" y="281" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Hoạt động dò khóa ngoại tuyến</text>
+  <rect x="276" y="244" width="264" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="292" y="264" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Dò khóa nằm ngoài phạm vi</text>
+  <text x="292" y="281" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">WIDS có thể thấy Deauth đi kèm.</text>
+  <rect x="552" y="244" width="368" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="568" y="264" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Đổi sang mật khẩu WPA2 mạnh</text>
+  <text x="568" y="281" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Kiểm chứng theo Phase 04.</text>
+  <rect x="40" y="296" width="224" height="48" rx="6" fill="#f0f4f9" stroke="#cfd9e4"/>
+  <text x="56" y="316" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Truy cập camera nội bộ</text>
+  <text x="56" y="333" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Khám phá LAN và truy cập HTTP</text>
+  <rect x="276" y="296" width="264" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="292" y="316" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Ngoài phạm vi quan sát</text>
+  <text x="292" y="333" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Cảm biến lọc frame quản lý 802.11.</text>
+  <rect x="552" y="296" width="368" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="568" y="316" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Tách Wi-Fi khách khỏi mạng nội bộ</text>
+  <text x="568" y="333" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Kiểm chứng Guest Network Isolation theo Phase 04.</text>
+  <rect x="40" y="348" width="224" height="48" rx="6" fill="#f0f4f9" stroke="#cfd9e4"/>
+  <text x="56" y="368" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Rủi ro từ WPS</text>
+  <text x="56" y="385" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Tính năng ghép nối của router</text>
+  <rect x="276" y="348" width="264" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="292" y="368" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Có rule, thiếu nguồn sự kiện</text>
+  <text x="292" y="385" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Rule 100120</text>
+  <rect x="552" y="348" width="368" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="568" y="368" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Tắt WPS trên router</text>
+  <text x="568" y="385" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Kiểm chứng theo Phase 04.</text>
+  <rect x="40" y="400" width="224" height="48" rx="6" fill="#f0f4f9" stroke="#cfd9e4"/>
+  <text x="56" y="420" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Giả mạo địa chỉ MAC</text>
+  <text x="56" y="437" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Giới hạn định danh qua 802.11</text>
+  <rect x="276" y="400" width="264" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="292" y="420" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Thiếu dữ liệu định danh</text>
+  <text x="292" y="437" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Địa chỉ nguồn có thể bị giả mạo.</text>
+  <rect x="552" y="400" width="368" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="568" y="420" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Dùng cơ chế xác thực thiết bị</text>
+  <text x="568" y="437" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Giảm phụ thuộc vào bộ lọc MAC.</text>
+  <rect x="40" y="452" width="224" height="48" rx="6" fill="#f0f4f9" stroke="#cfd9e4"/>
+  <text x="56" y="472" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Điểm truy cập giả mạo</text>
+  <text x="56" y="489" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Rogue AP / Evil Twin</text>
+  <rect x="276" y="452" width="264" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="292" y="472" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Có rule, thiếu nguồn sự kiện</text>
+  <text x="292" y="489" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Rule 100130</text>
+  <rect x="552" y="452" width="368" height="48" rx="6" fill="#ffffff" stroke="#cfd9e4"/>
+  <text x="568" y="472" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Đối chiếu AP với danh sách được phép</text>
+  <text x="568" y="489" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Theo dõi riêng tín hiệu nhận diện AP.</text>
+  <path d="M 40,532 H 920" fill="none" stroke="#cfd9e4" stroke-width="1.4" stroke-linecap="round"/>
+  <text x="40" y="556" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="0" fill="#182b43">Giới hạn thực nghiệm</text>
+  <text x="40" y="576" text-anchor="start" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="400" letter-spacing="0" fill="#53677d">Nhật ký xác nhận luồng phát hiện Deauth Flood. Bằng chứng trước và sau phòng thủ đang chờ tổng hợp.</text>
 </svg>

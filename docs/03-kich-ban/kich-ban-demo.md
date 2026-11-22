@@ -30,9 +30,9 @@ Một kẻ tấn công (**Huy**) ngồi trong phạm vi phủ sóng dùng laptop
 
 ## 2. Sơ đồ kiến trúc & Phân bổ thiết bị thực tế
 
-* Sơ đồ kiến trúc lab chi tiết: [`assets/so-do/chuyen-nghiep/01-kien-truc-lab.svg`](../../assets/so-do/chuyen-nghiep/01-kien-truc-lab.svg)
-* Sơ đồ pipeline giám sát Wazuh: [`assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.svg`](../../assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.svg)
-* Bản đồ bề mặt tấn công & khả năng phát hiện: [`assets/so-do/ban-do-tan-cong.svg`](../../assets/so-do/ban-do-tan-cong.svg)
+* Bố trí router, cảm biến và máy Wazuh trong phiên thực nghiệm. [Kiến trúc lab WISE](../../assets/so-do/chuyen-nghiep/01-kien-truc-lab.svg)
+* Thu frame, chuyển nhật ký qua LAN và tương quan cảnh báo. [Luồng giám sát Wazuh WIDS](../../assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.svg)
+* Đối chiếu rủi ro, tín hiệu WIDS và biện pháp phòng thủ. [Ma trận phạm vi phát hiện](../../assets/so-do/ban-do-tan-cong.svg)
 
 ```
   [A: Huy — Attacker]  ))) sóng Deauth / bắt Handshake )))     ((( sóng Wi-Fi (((  [AP: TL-WR940N v6]

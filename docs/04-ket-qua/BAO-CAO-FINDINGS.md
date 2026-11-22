@@ -5,9 +5,9 @@
 
 ## 1. Tóm tắt điều hành (Executive Summary)
 
-> *Gợi ý khung tóm tắt (cập nhật số liệu cuối sau Phase 05):*  
-> Nhóm đã thực hiện đánh giá bảo mật thực nghiệm trên mô hình mạng không dây của quán cà phê / văn phòng nhỏ sử dụng router **TP-Link TL-WR940N v6** (`BSSID: AC:15:A2:80:26:99`) và **iPhone IP Camera nội bộ**. Kết quả cho thấy sự kết hợp của **3 lỗ hổng liên tiếp** (thiếu 802.11w PMF + mật khẩu WPA2 yếu → mạng phẳng không cách ly khách → dịch vụ camera không xác thực) cho phép kẻ tấn công từ bên ngoài phá khóa Wi-Fi, quét mạng LAN bằng `nmap` và xem trực tiếp hình ảnh camera nội bộ chỉ trong vài phút.  
-> Ở chiều phòng thủ, hệ thống giám sát **Wazuh WIDS** (`tshark` + `sensor-wids.py` + Custom Decoder/Rules) đã phát hiện **100%** các đợt tấn công **Deauthentication Flood (Rule 100111, Level 12)** theo thời gian thực ngay ở giai đoạn đầu của chuỗi tấn công. Toàn bộ lỗ hổng sau đó đã được khắc phục và kiểm chứng thành công bằng 4 lớp phòng thủ: Mật khẩu mạnh, Tách mạng khách (*Guest Network Isolation*), Tắt WPS và chuẩn **802.11w (PMF)**.
+Kịch bản lab mô phỏng mạng Wi-Fi dùng chung với camera nội bộ trên router **TP-Link TL-WR940N v6**. Nhóm đánh giá rủi ro gián đoạn Wi-Fi, thông tin xác thực yếu và truy cập camera từ mạng dùng chung.
+
+Phiên 16/11/2026 ghi nhận hơn 23.387 sự kiện Wazuh, trong đó có 5.000 cảnh báo Deauth Flood mức 12 (`Rule 100111`). Tỉ lệ phát hiện, độ trễ và bằng chứng trước và sau phòng thủ sẽ được bổ sung từ Phase 04–05. [Nhật ký thực nghiệm](nhat-ky-phien-16-11-2026.md) · [Ma trận phạm vi phát hiện](../../assets/so-do/ban-do-tan-cong.svg)
 
 ## 2. Phạm vi & Phương pháp
 
@@ -19,11 +19,11 @@
 
 | ID | Tiêu đề lỗ hổng | Mức độ nghiêm trọng | Tactic / Technique (ATT&CK) | Trạng thái phát hiện bởi Wazuh WIDS | Trạng thái khắc phục (Phase 04) |
 |---|---|---|---|---|---|
-| **F-01** | AP không hỗ trợ/bật 802.11w (PMF) → bị tấn công Deauth Flood gây rớt mạng & lộ Handshake | **Cao** | `TA0040` Impact | ✅ **Phát hiện tức thì** (`Rule 100111`, Level 12 — đã test nổ 5,000+ alert ngày 16/11) | ✅ Kiểm chứng chống Deauth trên AP phụ bật 802.11w/WPA3 |
-| **F-02** | Mật khẩu WPA2-PSK yếu dễ bị dò khóa từ điển ngoại tuyến (Offline Crack) | **Cao** | `TA0006` Credential Access (`T1110.002`) | ⚠️ Phát hiện hành vi Deauth ép lấy Handshake; **không** phát hiện bước crack offline | ✅ Đổi mật khẩu mạnh → crack lại bằng cùng wordlist thất bại |
-| **F-03** | Dùng chung mạng phẳng & dịch vụ IP Camera nội bộ không xác thực → bị quét `Nmap` & lộ hình ảnh trực tiếp | **Cao** | `TA0007` Discovery (`T1046`), `TA0009` Collection | ❌ **Không phát hiện bởi WIDS L2** (lưu lượng đi trong Data Frame hợp lệ ở L3–L7) | ✅ Bật **Guest Network Isolation** trên TL-WR940N → chặn hoàn toàn truy cập từ mạng khách tới Camera |
-| **F-04** | Tính năng WPS bật sẵn trên Router, tiềm ẩn nguy cơ bị dò mã PIN 8 chữ số | **Trung bình** | `TA0006` Credential Access (`T1110`) | ⚠️ Có sẵn `Rule 100120` (cần mở rộng sensor đếm burst gói Auth/Assoc) | ✅ Tắt hoàn toàn WPS trên Router → chạy lại `wash`/`reaver` thất bại |
-| **F-05** | Bộ lọc địa chỉ MAC (MAC Filtering) dễ dàng bị vượt qua bằng kỹ thuật giả mạo MAC | **Thấp** | `TA0005` Defense Evasion | ❌ Không phát hiện (ngoài phạm vi cảm biến hiện tại) | ✅ Loại bỏ sự phụ thuộc vào lọc MAC trong chính sách an ninh |
+| **F-01** | AP không hỗ trợ/bật 802.11w (PMF) → bị tấn công Deauth Flood gây rớt mạng & lộ Handshake | **Cao** | `TA0040` Impact | Đã ghi nhận 5.000 cảnh báo mức 12 từ `Rule 100111` ngày 16/11 | Kiểm chứng trên AP phụ hỗ trợ 802.11w/WPA3 theo Phase 04 |
+| **F-02** | Mật khẩu WPA2-PSK yếu dễ bị dò khóa từ điển ngoại tuyến (Offline Crack) | **Cao** | `TA0006` Credential Access (`T1110.002`) | WIDS có thể thấy Deauth đi kèm. Dò khóa ngoại tuyến nằm ngoài phạm vi quan sát. | Kiểm chứng tác dụng của mật khẩu mạnh theo Phase 04 |
+| **F-03** | Dùng chung mạng phẳng & dịch vụ IP Camera nội bộ không xác thực → bị quét `Nmap` & lộ hình ảnh trực tiếp | **Cao** | `TA0007` Discovery (`T1046`), `TA0009` Collection | Luồng LAN/HTTP nằm ngoài phạm vi của cảm biến frame quản lý 802.11. | Kiểm chứng Guest Network Isolation theo Phase 04 |
+| **F-04** | Tính năng WPS bật sẵn trên Router, tiềm ẩn nguy cơ bị dò mã PIN 8 chữ số | **Trung bình** | `TA0006` Credential Access (`T1110`) | Đã có `Rule 100120`. Cảm biến hiện chưa sinh sự kiện WPS. | Kiểm chứng sau khi tắt WPS theo Phase 04 |
+| **F-05** | Bộ lọc địa chỉ MAC (MAC Filtering) dễ dàng bị vượt qua bằng kỹ thuật giả mạo MAC | **Thấp** | `TA0005` Defense Evasion | Thiếu dữ liệu để xác minh định danh từ frame thu được. | Giảm phụ thuộc vào lọc MAC trong chính sách an ninh |
 
 **Thang mức độ nghiêm trọng** (định tính dựa trên Khả năng khai thác × Tác động thực tế): **Nghiêm trọng > Cao > Trung bình > Thấp > Thông tin**.
 

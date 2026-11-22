@@ -4,12 +4,16 @@
 
 **Nghiên cứu chuỗi tấn công từ mạng Wi-Fi yếu đến lộ Camera nội bộ bằng AirHunt & Nmap, kết hợp xây dựng hệ thống giám sát – phát hiện xâm nhập không dây (WIDS) trên thiết bị thực bằng Wazuh.**
 
+![WISE. Cảm biến WIDS thu tín hiệu Wi-Fi và gửi sự kiện tới Wazuh.](assets/so-do/kien-truc-tong-the.svg)
+
+[Xem hình tổng quan](assets/so-do/kien-truc-tong-the.html) · [Tải PNG](assets/so-do/kien-truc-tong-the.png)
+
 ![Course](https://img.shields.io/badge/WISE432380-An%20to%C3%A0n%20m%E1%BA%A1ng%20kh%C3%B4ng%20d%C3%A2y-2e7d32)
 ![Attack](https://img.shields.io/badge/Red%20Team-AirHunt%20%2B%20Nmap-c0392b)
 ![Sensor](https://img.shields.io/badge/Sensor-tshark%20%2F%20WIDS-117a65)
 ![Detect](https://img.shields.io/badge/Blue%20Team-Wazuh%204.9.2-1f6fb2)
 ![Hardware](https://img.shields.io/badge/Lab-TL--WR940N%20%2B%20iPhone%20Cam-5d6d7e)
-![Status](https://img.shields.io/badge/Tr%E1%BA%A1ng%20th%C3%A1i-Đã%20test%20End--to--End-27ae60)
+![Status](https://img.shields.io/badge/WIDS-Deauth%20%C4%91%C3%A3%20ki%E1%BB%83m%20th%E1%BB%AD-27ae60)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 [Kịch bản tổng thể](docs/03-kich-ban/kich-ban-demo.md) · [Checklist 7 Phase](docs/03-kich-ban/phase/README.md) · [ROE](docs/ROE.md) · [ATT&CK Mapping](docs/ATTACK_MAPPING.md) · [Kết quả & Nhật ký Lab](docs/04-ket-qua/) · [Pháp lý & Đạo đức](docs/LEGAL_ETHICS.md)
@@ -30,9 +34,9 @@ Một **phòng lab Tấn công – Giám sát – Phòng thủ (Red / Sensor / B
 
 1. **🔴 Vế Công (Red Team — Huy):** Dùng **AirHunt** thực hiện trinh sát vô tuyến, bắn **Deauthentication Flood** ép thiết bị ngắt kết nối để bắt **4-Way Handshake**, crack mật khẩu WPA2 yếu, sau đó kết nối vào mạng LAN dùng **Nmap** tìm cổng dịch vụ và mở xem trực tiếp luồng hình ảnh từ **iPhone IP Camera nội bộ** (`SimpleIPCamera`).
 2. **🔵 Vế Giám sát (Wireless Sensor — Hưng & Wazuh SIEM — Khang):** Cảm biến `tshark` (`code/sensor/sensor-wids.py`) lắng nghe ở chế độ Monitor Mode, đẩy log qua cáp LAN về **Wazuh Manager** để bóc tách trường và **nổ cảnh báo mức 12 (Rule 100111 — Deauth Flood)** theo thời gian thực ngay từ đầu chuỗi tấn công.
-3. **🛡️ Vế Phòng thủ & Kiểm chứng (Mitigation — Cả nhóm):** Đóng từng mắt xích rủi ro bằng **4 lớp phòng thủ** (Mật khẩu mạnh, Tách mạng khách **Guest Network Isolation** trên TL-WR940N chặn truy cập Camera, Tắt WPS, và chuẩn **802.11w PMF**) rồi chạy lại tấn công để chứng minh thất bại bằng thực nghiệm.
+3. **🛡️ Vế Phòng thủ & Kiểm chứng (Mitigation — Cả nhóm)** dự kiến kiểm chứng bốn biện pháp trong Phase 04 gồm mật khẩu mạnh, cách ly mạng khách, tắt WPS và dùng AP phụ hỗ trợ 802.11w (PMF).
 
-Khác với các đồ án chỉ dừng ở "crack được mật khẩu Wi-Fi", dự án này chứng minh trọn vẹn **hậu quả thực tế sau khi lộ Wi-Fi (lộ camera nội bộ)**, đồng thời chỉ ra **hệ thống WIDS tầng 2 mạnh ở đâu và mù ở đâu** (ranh giới giữa giám sát 802.11 L2 và lưu lượng Nmap/HTTP L3–L7).
+Kịch bản mô phỏng nguy cơ lộ hình ảnh camera nội bộ khi Wi-Fi và mạng LAN dùng chung. Phiên 16/11/2026 đã kiểm chứng luồng cảnh báo Deauth Flood. Cảm biến hiện quan sát frame quản lý 802.11, còn lưu lượng LAN/HTTP nằm ngoài phạm vi của nó. [Nhật ký thực nghiệm](docs/04-ket-qua/nhat-ky-phien-16-11-2026.md)
 
 ---
 
@@ -42,35 +46,32 @@ Khác với các đồ án chỉ dừng ở "crack được mật khẩu Wi-Fi",
 |---|---|---|---|
 | 🔴 | **Kịch bản Demo 6 màn** | [docs/03-kich-ban/kich-ban-demo.md](docs/03-kich-ban/kich-ban-demo.md) | Bối cảnh quán cà phê, mạch 6 màn (Recon → Deauth → Handshake → Camera LAN → Phòng thủ), lời dẫn 18 phút & phiếu đo |
 | 📋 | **Checklist 7 Phase thực thi** | [docs/03-kich-ban/phase/](docs/03-kich-ban/phase/README.md) | Hướng dẫn từng bước theo quy tắc *"người này báo OK tới người kia"* từ Phase 00 đến Phase 06 |
-| 🔵 | **Decoder + Rule Wazuh** | [code/wazuh/](code/wazuh/) | `local_decoder.xml` & `local_rules.xml` bắt Deauth flood (`100111`), WPS (`100120`), Rogue AP (`100130`) |
+| 🔵 | **Decoder + Rule Wazuh** | [code/wazuh/](code/wazuh/) | Deauth Flood (`100111`) đã được ghi nhận. WPS (`100120`) và Rogue AP (`100130`) cần nguồn sự kiện tương ứng. |
 | 🔵 | **Cảm biến WIDS (`tshark`)** | [code/sensor/sensor-wids.py](code/sensor/sensor-wids.py) | Bắt frame Deauth/Disassoc (`0x0c`/`0x0a`) trên không khí → ghi `/var/log/wifi-wids.log` cho Wazuh Agent |
-| 📊 | **Nhật ký & Báo cáo Findings** | [docs/04-ket-qua/](docs/04-ket-qua/) | Nhật ký test thực tế ngày 16/11 (5,000+ alert Level 12) & mẫu Pentest Findings Report (`F-01` → `F-05`) |
-| 🖼️ | **Bộ sơ đồ kiến trúc** | [assets/so-do/](assets/so-do/) | Sơ đồ kiến trúc lab, pipeline giám sát Wazuh và bản đồ bề mặt tấn công (SVG / PNG / Draw.io) |
+| 📊 | **Nhật ký & Báo cáo Findings** | [docs/04-ket-qua/](docs/04-ket-qua/) | Phiên 16/11 ghi nhận 5.000 cảnh báo mức 12. Thư mục cũng có mẫu Findings Report (`F-01` → `F-05`). |
+| 🖼️ | **Bộ sơ đồ kiến trúc** | [assets/so-do/](assets/so-do/) | Kiến trúc lab, luồng giám sát Wazuh và ma trận phạm vi phát hiện (HTML / SVG / PNG / Draw.io) |
 
 ---
 
-## 3. Kiến trúc hệ thống & Pipeline giám sát
+## 3. Kiến trúc hệ thống và phạm vi giám sát
 
-### 3.1. Kiến trúc Lab kiểm thử & giám sát thực tế
-![Kiến trúc Lab kiểm thử & giám sát](assets/so-do/chuyen-nghiep/01-kien-truc-lab.svg)
+### 3.1. Kiến trúc lab WISE
 
-### 3.2. Pipeline thu thập & phát hiện sự kiện trên Wazuh
-![Pipeline thu thập & phát hiện sự kiện](assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.svg)
+![Router TL-WR940N v6 nối các máy qua cổng LAN tích hợp, cảm biến thu frame Wi-Fi qua Monitor Mode.](assets/so-do/chuyen-nghiep/01-kien-truc-lab.svg)
 
-### 3.3. Bản đồ bề mặt tấn công & Khả năng phát hiện của WIDS
-![Bản đồ tấn công & khả năng phát hiện](assets/so-do/ban-do-tan-cong.svg)
+[Bản HTML](assets/so-do/chuyen-nghiep/01-kien-truc-lab.html) · [PNG](assets/so-do/chuyen-nghiep/01-kien-truc-lab.png)
 
-```text
-Attacker (Huy) ──[1. AirHunt: Deauth + Bắt Handshake + Crack]──> AP TL-WR940N (AC:15:A2:80:26:99)
-               ──[2. Vào Wi-Fi -> Nmap quét LAN -> Xem HTTP]───> iPhone IP Camera (DEMO-01 / DEMO-02)
-                                       ╎
-                                       ╎ (Sensor nghe thụ động qua Monitor Mode ở tầng L2)
-                                       ▼
-Sensor (Hưng)  ──> tshark lọc frame 0x0c/0x0a ──> /var/log/wifi-wids.log ──> Wazuh Agent (002 hungs)
-                                                                                   │ (Cáp LAN trực tiếp)
-                                                                                   ▼
-Blue Team (Khang) <── 🚨 ALERT Rule 100111 (Level 12) <── Rule xét ngưỡng <── Wazuh Manager (4.9.2)
-```
+### 3.2. Luồng giám sát Wazuh WIDS
+
+![Cảm biến ghi nhật ký, Agent chuyển qua LAN, Manager tương quan theo client và Dashboard hiển thị cảnh báo từ Indexer.](assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.svg)
+
+[Bản HTML](assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.html) · [PNG](assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.png)
+
+### 3.3. Phạm vi phát hiện của WIDS
+
+![Ma trận phạm vi phát hiện. WIDS đã ghi nhận Deauth Flood, còn WPS và Rogue AP cần thêm dữ liệu từ cảm biến.](assets/so-do/ban-do-tan-cong.svg)
+
+[Bản HTML](assets/so-do/ban-do-tan-cong.html) · [Tệp Draw.io chỉnh sửa được, gồm cả ba sơ đồ](assets/so-do/chuyen-nghiep/wise-airhunt-kien-truc.drawio)
 
 ---
 
@@ -80,7 +81,7 @@ Blue Team (Khang) <── 🚨 ALERT Rule 100111 (Level 12) <── Rule xét ng
 |---|---|
 | Hiểu toàn bộ kịch bản 6 màn, thông số thiết bị thật & lời dẫn thuyết trình 18 phút | [docs/03-kich-ban/kich-ban-demo.md](docs/03-kich-ban/kich-ban-demo.md) |
 | Xem checklist cầm tay chỉ việc từng người (Huy / Hưng / Khang) theo từng Phase | [docs/03-kich-ban/phase/README.md](docs/03-kich-ban/phase/README.md) |
-| Xem kết quả dựng lab thật, các lỗi đã xử lý & 5,000+ alert Wazuh đầu tiên | [docs/04-ket-qua/nhat-ky-phien-16-11-2026.md](docs/04-ket-qua/nhat-ky-phien-16-11-2026.md) |
+| Xem kết quả dựng lab, các lỗi đã xử lý và 5.000 cảnh báo Wazuh mức 12 | [docs/04-ket-qua/nhat-ky-phien-16-11-2026.md](docs/04-ket-qua/nhat-ky-phien-16-11-2026.md) |
 | Cài đặt Decoder, Rule và kiểm thử `wazuh-logtest` trên Wazuh Manager | [code/wazuh/README.md](code/wazuh/README.md) |
 | Biết phạm vi được phép làm (Rules of Engagement như một dự án Pentest thật) | [docs/ROE.md](docs/ROE.md) |
 | Xem ánh xạ chuỗi tấn công theo khung MITRE ATT&CK (`TA0043`, `TA0040`, `T1110`, `T1046`) | [docs/ATTACK_MAPPING.md](docs/ATTACK_MAPPING.md) |
@@ -132,13 +133,13 @@ WISE/
 │       ├── README.md
 │       ├── local_decoder.xml                  # Decoder bóc trường log WIFI-WIDS
 │       └── local_rules.xml                    # Ruleset Wazuh (ID 100100 -> 100130)
-├── assets/so-do/                              # SƠ ĐỒ KIẾN TRÚC (SVG / PNG / Draw.io)
-│   ├── kien-truc-tong-the.svg
-│   ├── ban-do-tan-cong.svg
+├── assets/so-do/                              # BỘ SƠ ĐỒ WISE
+│   ├── kien-truc-tong-the.html                # Hình tổng quan (+ .svg, .png)
+│   ├── ban-do-tan-cong.html                   # Ma trận phạm vi phát hiện (+ .svg)
 │   └── chuyen-nghiep/
-│       ├── 01-kien-truc-lab.svg               # (+ .png) Sơ đồ kiến trúc lab chi tiết
-│       ├── 02-pipeline-giam-sat.svg           # (+ .png) Sơ đồ pipeline Wazuh WIDS
-│       └── wise-airhunt-kien-truc.drawio      # File nguồn Draw.io
+│       ├── 01-kien-truc-lab.html              # Kiến trúc lab (+ .svg, .png)
+│       ├── 02-pipeline-giam-sat.html          # Luồng Wazuh WIDS (+ .svg, .png)
+│       └── wise-airhunt-kien-truc.drawio      # Ba sơ đồ chỉnh sửa được
 ├── .githooks/                                 # Git hook chặn push trực tiếp lên main
 └── setup.sh                                   # Script kích hoạt git hook sau khi clone
 ```
