@@ -4,10 +4,6 @@
 
 **Nghiên cứu chuỗi tấn công từ mạng Wi-Fi yếu đến lộ Camera nội bộ bằng AirHunt & Nmap, kết hợp xây dựng hệ thống giám sát – phát hiện xâm nhập không dây (WIDS) trên thiết bị thực bằng Wazuh.**
 
-![WISE. Cảm biến WIDS thu tín hiệu Wi-Fi và gửi sự kiện tới Wazuh.](assets/so-do/kien-truc-tong-the.svg)
-
-[Xem hình tổng quan](assets/so-do/kien-truc-tong-the.html) · [Tải PNG](assets/so-do/kien-truc-tong-the.png)
-
 ![Course](https://img.shields.io/badge/WISE432380-An%20to%C3%A0n%20m%E1%BA%A1ng%20kh%C3%B4ng%20d%C3%A2y-2e7d32)
 ![Attack](https://img.shields.io/badge/Red%20Team-AirHunt%20%2B%20Nmap-c0392b)
 ![Sensor](https://img.shields.io/badge/Sensor-tshark%20%2F%20WIDS-117a65)
@@ -53,25 +49,17 @@ Kịch bản mô phỏng nguy cơ lộ hình ảnh camera nội bộ khi Wi-Fi v
 
 ---
 
-## 3. Kiến trúc hệ thống và phạm vi giám sát
+## 3. Luồng giám sát Wi-Fi
 
-### 3.1. Kiến trúc lab WISE
-
-![Router TL-WR940N v6 nối các máy qua cổng LAN tích hợp, cảm biến thu frame Wi-Fi qua Monitor Mode.](assets/so-do/chuyen-nghiep/01-kien-truc-lab.svg)
-
-[Bản HTML](assets/so-do/chuyen-nghiep/01-kien-truc-lab.html) · [PNG](assets/so-do/chuyen-nghiep/01-kien-truc-lab.png)
-
-### 3.2. Luồng giám sát Wazuh WIDS
-
-![Cảm biến ghi nhật ký, Agent chuyển qua LAN, Manager tương quan theo client và Dashboard hiển thị cảnh báo từ Indexer.](assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.svg)
-
-[Bản HTML](assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.html) · [PNG](assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.png)
-
-### 3.3. Phạm vi phát hiện của WIDS
-
-![Ma trận phạm vi phát hiện. WIDS đã ghi nhận Deauth Flood, còn WPS và Rogue AP cần thêm dữ liệu từ cảm biến.](assets/so-do/ban-do-tan-cong.svg)
-
-[Bản HTML](assets/so-do/ban-do-tan-cong.html) · [Tệp Draw.io chỉnh sửa được, gồm cả ba sơ đồ](assets/so-do/chuyen-nghiep/wise-airhunt-kien-truc.drawio)
+```mermaid
+flowchart TD
+    accTitle: Luồng giám sát Wi-Fi của WISE
+    accDescr: Cảm biến WIDS thu frame Wi-Fi. Wazuh Agent chuyển log qua LAN đến Manager để tạo cảnh báo hiển thị trên Dashboard.
+    wifi(["Wi-Fi Lab"]) --> wids(["WIDS · tshark"])
+    wids -->|Agent qua LAN| manager(["Wazuh Manager"])
+    manager --> dashboard(["Dashboard"])
+    style manager fill:#1f5792,stroke:#72a5d5,color:#ffffff
+```
 
 ---
 
