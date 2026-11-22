@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WISE · Wi-Fi, WIDS, Wazuh</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 12px; background: #f7f9fc; color: #182b43; font-family: 'Segoe UI', Arial, sans-serif; }
+    main { width: 100%; max-width: 1280px; min-width: 0; margin-inline: auto; }
+    .diagram-container { width: 100%; overflow-x: auto; }
+    .diagram-container:focus-visible { outline: 2px solid #245db1; }
+    svg { display: block; width: 100%; min-width: 1280px; }
+    h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    nav { padding: 16px 24px; }
+    nav ul { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 0; padding: 0; list-style: none; }
+    a { color: #245db1; text-underline-offset: 3px; }
+    @media print {
+      .diagram-container { overflow-x: visible; }
+      svg { min-width: 0; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>WISE</h1>
+    <div class="diagram-container" tabindex="0" role="region" aria-label="Sơ đồ tổng quan WISE">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 520" role="img" aria-labelledby="kien-truc-tong-the-title kien-truc-tong-the-desc">
+        <title id="kien-truc-tong-the-title">WISE</title>
+        <desc id="kien-truc-tong-the-desc">Cảm biến WIDS thu tín hiệu Wi-Fi trong lab để Wazuh phân tích và hiển thị cảnh báo.</desc>
+
+        <rect x="0" y="0" width="1280" height="520" fill="#f7f9fc"/>
+        <rect x="0" y="0" width="1280" height="192" fill="#182b43"/>
+        <text x="64" y="116" font-family="Cambria, 'Times New Roman', serif" font-size="60" fill="#ffffff">WISE</text>
+        <g aria-hidden="true" fill="none" stroke="#7896ba" stroke-width="2" stroke-linecap="round">
+          <path d="M1000 84 Q1092 12 1184 84"/>
+          <path d="M1024 108 Q1092 56 1160 108"/>
+          <path d="M1048 132 Q1092 100 1136 132"/>
+          <circle cx="1092" cy="156" r="5" fill="#bfd4f3" stroke="none"/>
+        </g>
+
+        <rect x="64" y="328" width="1152" height="48" rx="6" fill="#e8eef6"/>
+        <rect x="832" y="328" width="384" height="48" rx="6" fill="#dbe8fa"/>
+        <path aria-hidden="true" d="M402 352 H454 M446 344 L454 352 L446 360 M819 352 H871 M863 344 L871 352 L863 360" fill="none" stroke="#53677d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <g font-family="'Segoe UI', Arial, sans-serif" text-anchor="middle">
+          <circle cx="224" cy="352" r="48" fill="#ffffff" stroke="#53677d" stroke-width="1.5"/>
+          <g aria-hidden="true" fill="none" stroke="#182b43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="198" y="352" width="52" height="18" rx="4"/>
+            <path d="M207 352 V341 M241 352 V341 M210 335 Q224 320 238 335 M217 340 Q224 333 231 340 M207 361 H209 M215 361 H217 M239 361 H242"/>
+          </g>
+          <text x="224" y="440" font-size="28" font-weight="600" fill="#182b43">Wi-Fi</text>
+
+          <circle cx="640" cy="352" r="48" fill="#ffffff" stroke="#53677d" stroke-width="1.5"/>
+          <g aria-hidden="true" fill="none" stroke="#182b43" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M622 332 H658 Q662 332 662 336 V363 H618 V336 Q618 332 622 332 Z M612 372 H668 M616 372 L618 363 M664 372 L662 363"/>
+            <path d="M625 348 H631 L635 341 L641 355 L647 345 L650 348 H655"/>
+          </g>
+          <text x="640" y="440" font-size="28" font-weight="600" fill="#182b43">WIDS</text>
+
+          <circle cx="1056" cy="352" r="48" fill="#eaf1fc" stroke="#245db1" stroke-width="2"/>
+          <g aria-hidden="true" fill="none" stroke="#245db1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1030" y="329" width="52" height="37" rx="4"/>
+            <path d="M1056 366 V375 M1044 375 H1068 M1056 336 V350 M1056 357 V358"/>
+          </g>
+          <text x="1056" y="440" font-size="28" font-weight="600" fill="#245db1">Wazuh</text>
+        </g>
+      </svg>
+    </div>
+    <nav aria-label="Sơ đồ và tài liệu đối chiếu">
+      <ul>
+        <li><a href="chuyen-nghiep/01-kien-truc-lab.html">Kiến trúc lab</a></li>
+        <li><a href="chuyen-nghiep/02-pipeline-giam-sat.html">Luồng giám sát</a></li>
+        <li><a href="ban-do-tan-cong.html">Phạm vi phát hiện</a></li>
+        <li><a href="../../docs/04-ket-qua/nhat-ky-phien-16-11-2026.md">Nhật ký thực nghiệm</a></li>
+      </ul>
+    </nav>
+  </main>
+</body>
+</html>

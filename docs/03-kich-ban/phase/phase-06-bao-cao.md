@@ -16,9 +16,10 @@
       → **Báo OK** khi bản thảo Chương 4, Chương 5 và Findings Report xong.
 
 - [ ] **Bước 4 (Cả nhóm):** Ghép 5 chương thống nhất văn phong tại [`docs/05-bao-cao/`](../../05-bao-cao/), nhúng bộ sơ đồ chuẩn từ `assets/so-do/`:
-      - `assets/so-do/chuyen-nghiep/01-kien-truc-lab.svg` (hoặc `.png`)
-      - `assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.svg` (hoặc `.png`)
-      - `assets/so-do/ban-do-tan-cong.svg`  
+      - [Kiến trúc lab WISE](../../../assets/so-do/chuyen-nghiep/01-kien-truc-lab.svg) · [PNG](../../../assets/so-do/chuyen-nghiep/01-kien-truc-lab.png)
+      - [Luồng giám sát Wazuh WIDS](../../../assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.svg) · [PNG](../../../assets/so-do/chuyen-nghiep/02-pipeline-giam-sat.png)
+      - [Ma trận phạm vi phát hiện](../../../assets/so-do/ban-do-tan-cong.svg) · [Tệp Draw.io gồm ba sơ đồ](../../../assets/so-do/chuyen-nghiep/wise-airhunt-kien-truc.drawio)
+
       → **Báo OK** khi báo cáo 5 chương hoàn chỉnh.
 
 - [ ] **Bước 5 (Cả nhóm):** Thiết kế Slide bảo vệ bám sát kịch bản 15–18 phút ở Mục 6 của [`kich-ban-demo.md`](../kich-ban-demo.md):
