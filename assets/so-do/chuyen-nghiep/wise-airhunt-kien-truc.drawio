@@ -531,7 +531,7 @@
         <mxCell id="144" value="KỊCH BẢN" style="text;html=0;whiteSpace=wrap;overflow=visible;align=left;verticalAlign=top;spacing=0;spacingTop=0;strokeColor=none;fillColor=none;fontColor=#53677D;fontFamily=Segoe UI;fontSize=15;fontStyle=1;" parent="1" vertex="1">
           <mxGeometry x="84" y="898" width="110" height="21.0" as="geometry" />
         </mxCell>
-        <mxCell id="145" value="Baseline  →  Recon  →  Deauth  →  Handshake  →  PMKID  →  Phòng thủ" style="text;html=0;whiteSpace=wrap;overflow=visible;align=left;verticalAlign=top;spacing=0;spacingTop=0;strokeColor=none;fillColor=none;fontColor=#182B43;fontFamily=Segoe UI;fontSize=20;fontStyle=1;" parent="1" vertex="1">
+        <mxCell id="145" value="Baseline  →  Recon  →  Deauth  →  Handshake  →  Camera LAN  →  Phòng thủ" style="text;html=0;whiteSpace=wrap;overflow=visible;align=left;verticalAlign=top;spacing=0;spacingTop=0;strokeColor=none;fillColor=none;fontColor=#182B43;fontFamily=Segoe UI;fontSize=20;fontStyle=1;" parent="1" vertex="1">
           <mxGeometry x="215" y="893" width="1150" height="28.0" as="geometry" />
         </mxCell>
         <mxCell id="146" value="" style="edgeStyle=none;rounded=0;html=0;strokeColor=#CFD9E4;strokeWidth=1;dashed=0;dashPattern=3 3;endArrow=none;startArrow=none;endFill=1;startFill=1;" parent="1" edge="1">
