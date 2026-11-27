@@ -8,7 +8,7 @@ Thư mục này chứa decoder và rule tùy biến để Wazuh phát hiện t�
 Cảm biến (Hưng) ghi log  →  Wazuh agent gửi về  →  DECODER bóc trường  →  RULE xét ngưỡng  →  Alert dashboard
 ```
 
-- `local_decoder.xml` — bóc dòng log thô thành các trường: attack_type, bssid, client, channel, count.
+- `local_decoder.xml` — bóc dòng log thô thành các trường: attack_type, bssid, ssid, src, client, channel, signal, reason, count.
 - `local_rules.xml` — xét các trường, sinh cảnh báo (deauth flood, WPS, rogue AP).
 
 ## Các bước cài trên máy Wazuh manager
@@ -24,9 +24,10 @@ Cảm biến (Hưng) ghi log  →  Wazuh agent gửi về  →  DECODER bóc tr�
    ```
    Rồi dán vào dòng:
    ```
-   WIFI-WIDS type=deauth bssid=A0:B1:C2:D3:E4:F5 client=11:22:33:44:55:66 channel=6 count=1
+   WIFI-WIDS type=deauth bssid=a0:b1:c2:d3:e4:f5 ssid="Lab-Cafe-Wifi" src=a0:b1:c2:d3:e4:f5 client=11:22:33:44:55:66 channel=6 signal=-42 reason=7 count=1
    ```
-   Kỳ vọng: thấy `decoder: 'wifi-wids'` và các trường được bóc ra, rule 100110 khớp.
+   Kỳ vọng: thấy `decoder: 'wifi-wids'` và các trường (`bssid`, `ssid`, `src`, `client`, `channel`, `signal`, `reason`, `count`) được bóc ra, rule 100110 khớp.
+   Đổi `count=1` thành `count=8` → rule 100111 (level 12) phải nổ ngay.
 3. Khởi động lại manager để áp dụng:
    ```bash
    sudo systemctl restart wazuh-manager
@@ -52,6 +53,7 @@ Rồi `sudo systemctl restart wazuh-agent`. Đăng ký agent với manager của
 
 ## Tinh chỉnh ngưỡng (Phase 5)
 
-Trong `local_rules.xml`, rule 100111 có `frequency="5" timeframe="10"` = 5 gói trong 10 giây.
-Nếu báo nhầm nhiều (false positive) → tăng frequency. Nếu bắt chậm → giảm. Ghi lại giá trị
+Cảm biến gom gói theo cửa sổ (mặc định 1 giây, tham số `--window`) và ghi `count` = số gói trong cửa sổ.
+Rule 100111 nổ khi `count >= 5` (regex `^([5-9]|[1-9]\d+)$` trong `local_rules.xml`).
+Nếu báo nhầm nhiều (false positive) → tăng ngưỡng. Nếu bắt chậm → giảm ngưỡng hoặc giảm `--window`. Ghi lại giá trị
 đã chọn và lý do vào báo cáo (phần đo lường).

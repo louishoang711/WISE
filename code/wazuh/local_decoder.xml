@@ -1,8 +1,8 @@
 <!--
   Decoder tùy biến cho WIDS Wi-Fi - do Khang (Wazuh) cài.
   Đặt file này tại: /var/ossec/etc/decoders/local_decoder.xml trên Wazuh manager.
-  Log đầu vào (do cảm biến của Hưng ghi ra) có dạng:
-    WIFI-WIDS type=deauth bssid=A0:B1:C2:D3:E4:F5 client=11:22:33:44:55:66 channel=6 count=1
+  Log đầu vào (do cảm biến của Hưng ghi ra, 1 dòng / (BSSID, src, client) / cửa sổ 1 giây) có dạng:
+    WIFI-WIDS type=deauth bssid=a0:b1:c2:d3:e4:f5 ssid="Lab-Cafe-Wifi" src=a0:b1:c2:d3:e4:f5 client=11:22:33:44:55:66 channel=6 signal=-42 reason=7 count=120
 -->
 
 <decoder name="wifi-wids">
@@ -11,6 +11,6 @@
 
 <decoder name="wifi-wids-fields">
   <parent>wifi-wids</parent>
-  <regex>type=(\S+) bssid=(\S+) client=(\S+) channel=(\d+) count=(\d+)</regex>
-  <order>attack_type,bssid,client,channel,count</order>
+  <regex type="pcre2">type=(\S+) bssid=(\S+) ssid="([^"]*)" src=(\S+) client=(\S+) channel=(\d+) signal=(-?\d+) reason=(\d+) count=(\d+)</regex>
+  <order>attack_type,bssid,ssid,src,client,channel,signal,reason,count</order>
 </decoder>

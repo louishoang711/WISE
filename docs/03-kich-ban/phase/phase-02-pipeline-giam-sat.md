@@ -37,6 +37,6 @@
       Đã nạp [`code/wazuh/local_decoder.xml`](../../../code/wazuh/local_decoder.xml) và [`code/wazuh/local_rules.xml`](../../../code/wazuh/local_rules.xml), kiểm chứng qua `wazuh-logtest` và thực nghiệm nổ thành công:
       - `Rule 100100` (Level 3): Nhận diện sự kiện `wifi-wids`.
       - `Rule 100110` (Level 4): Phát hiện 1 gói Deauth đơn lẻ.
-      - `Rule 100111` (Level 12): Phát hiện **Tấn công Deauth Flood** (`frequency="5"`, `timeframe="10"`, `<same_field>client</same_field>`).
+      - `Rule 100111` (Level 12): Phát hiện **Tấn công Deauth Flood** (cảm biến gom gói theo cửa sổ 1 giây; rule nổ khi `count >= 5` trong một dòng log).
 - [x] **Cập nhật [`code/sensor/sensor-wids.py`](../../../code/sensor/sensor-wids.py):**
       Đã bổ sung bộ lọc `TARGET_BSSID` (tham số dòng lệnh thứ 2) và tự động chuẩn hóa MAC về chữ thường để loại bỏ hoàn toàn nhiễu Deauth từ các mạng Wi-Fi hàng xóm ngay tại nguồn.
