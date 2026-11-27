@@ -16,7 +16,7 @@
   <!-- Deauth/disassoc ít gói trong 1 cửa sổ (mức thấp, có thể là nhiễu tự nhiên) -->
   <rule id="100110" level="4">
     <if_sid>100100</if_sid>
-    <field name="attack_type">^(deauth|disassoc)$</field>
+    <field name="attack_type" type="pcre2">^(deauth|disassoc)$</field>
     <description>WIDS: $(attack_type) ($(count) goi) toi client $(client) tren AP $(bssid) / $(ssid)</description>
   </rule>
 
@@ -28,7 +28,7 @@
   -->
   <rule id="100111" level="12">
     <if_sid>100110</if_sid>
-    <field name="count">^([5-9]|[1-9]\d+)$</field>
+    <field name="count" type="pcre2">^([5-9]|[1-9]\d+)$</field>
     <description>WIDS: TAN CONG Deauth flood ($(count) goi/cua so) vao client $(client) tu AP $(bssid) / $(ssid)</description>
     <group>attack,dos,</group>
   </rule>
