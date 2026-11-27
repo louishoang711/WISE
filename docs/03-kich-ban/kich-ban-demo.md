@@ -92,7 +92,7 @@ Một kẻ tấn công (**Huy**) ngồi trong phạm vi phủ sóng dùng laptop
 - **Hiện tượng phía nạn nhân:** iPhone bị rớt kết nối Wi-Fi tạm thời (luồng video camera trên máy Khang bị đứng hình), sau đó iPhone tự động kết nối lại vào AP.
 - **Kết quả tại Wazuh (Hưng & Khang):**
   - `sensor-wids.py` trên máy Hưng bắt tức thì chuỗi frame `0x0c` (deauth) / `0x0a` (disassoc) và ghi vào `/var/log/wifi-wids.log`.
-  - Wazuh Agent đẩy log về Manager → Decoder `wifi-wids` bóc tách `bssid`, `client` → **Rule `100110` (level 4)** kích hoạt cho từng gói lẻ và ngay khi đạt ngưỡng **≥ 5 gói / 10 giây** vào cùng một client, **Rule `100111` (level 12 — `"WIDS: TAN CONG Deauth flood"`) nổ cảnh báo mức cao** trên Dashboard trong vài giây!
+  - Wazuh Agent đẩy log về Manager → Decoder `wifi-wids` bóc tách `bssid`, `client` → **Rule `100110` (level 4)** kích hoạt cho từng gói lẻ và ngay khi một cửa sổ 1 giây có **≥ 5 gói** vào cùng một client, **Rule `100111` (level 12 — `"WIDS: TAN CONG Deauth flood"`) nổ cảnh báo mức cao** trên Dashboard trong vài giây!
   - Khang đo **thời gian phát hiện (Detection Latency)** = `T_alert - T_attack`.
 
 ### Màn 3 — Bắt 4-Way Handshake & Kiểm chứng Crack mật khẩu WPA2
